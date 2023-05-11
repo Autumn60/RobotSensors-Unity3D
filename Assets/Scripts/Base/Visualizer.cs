@@ -32,7 +32,7 @@ namespace RobotSensors
         [SerializeField]
         protected VisualizeMode _visualizeMode_edit = VisualizeMode.SELECTED;
         [SerializeField]
-        private VisualizeMode _visualizeMode_play = VisualizeMode.ALWAYS;
+        protected VisualizeMode _visualizeMode_play = VisualizeMode.ALWAYS;
         [SerializeField]
         private Color _defaultColor = Color.white;
 
