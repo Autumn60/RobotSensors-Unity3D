@@ -6,6 +6,7 @@ using Unity.Robotics.ROSTCPConnector;
 
 namespace RobotSensors
 {
+    [ExecuteAlways]
     public class Publisher<T> : MonoBehaviour
     {
         [SerializeField]
@@ -25,8 +26,9 @@ namespace RobotSensors
             _sensor = GetComponent<T>();
         }
 
-        private void Start()
+        protected virtual void Start()
         {
+            if (!Application.isPlaying) return;
             _time_old = Time.time;
             _frequency_inv = 1.0f / _frequency;
             Init();
@@ -37,8 +39,9 @@ namespace RobotSensors
         
         }
 
-        private void Update()
+        protected virtual void Update()
         {
+            if (!Application.isPlaying) return;
             _time_now = Time.time;
             if(_time_now - _time_old > _frequency_inv)
             {
