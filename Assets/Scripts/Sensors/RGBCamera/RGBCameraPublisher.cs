@@ -18,11 +18,10 @@ namespace RobotSensors
 
         protected override void Init()
         {
+            _topicName += "/compressed";
             _ros.RegisterPublisher<CompressedImageMsg>(_topicName);
             _serializer = new RGBCameraSerializer();
             _serializer.Init(_frame_id);
-            
-            _topicName += "/compressed";
         }
 
         protected override void Publish(float time)
