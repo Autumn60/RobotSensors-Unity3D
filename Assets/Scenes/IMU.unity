@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _frequency: 10
-  _topic_name: imu/raw_data
+  _topicName: imu/raw_data
   _frame_id: imu_link
 --- !u!1 &500369364
 GameObject:
