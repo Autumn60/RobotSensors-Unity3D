@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IMUSensor : MonoBehaviour
+namespace RobotSensors
 {
-    // Start is called before the first frame update
-    void Start()
+    public class IMUSensor : Sensor
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    
     }
 }

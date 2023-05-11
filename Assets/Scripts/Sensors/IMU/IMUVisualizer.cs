@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IMUVisualizer : MonoBehaviour
+namespace RobotSensors
 {
-    // Start is called before the first frame update
-    void Start()
+    public class IMUVisualizer : Visualizer<IMUSensor>
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IMUSerializer : MonoBehaviour
+namespace RobotSensors
 {
-    // Start is called before the first frame update
-    void Start()
+    public class IMUSerializer : Serializer
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
