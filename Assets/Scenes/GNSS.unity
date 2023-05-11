@@ -158,9 +158,9 @@ MonoBehaviour:
   _frame_id: gnss_link
   _serializer:
     _format:
-      scriptableObject: {fileID: 11400000, guid: 1c1daa7146cd59242ab5b3099bd7ed38, type: 2}
-      _parametersCache: '{"_mode":0,"_satelliteID":[],"_locatingType":1,"_PDOP":0.0,"_HDOP":0.0,"_VDOP":0.0}'
-      _scriptableObject: {fileID: 1301619668}
+      scriptableObject: {fileID: 11400000, guid: 77a3cb354447d1a4582f830df78ebaae, type: 2}
+      _parametersCache: '{"_timeMode":0,"_quality":0,"_satelliteNum":8,"_HDOP":0.0,"_geoidHeight":36.70709991455078}'
+      _scriptableObject: {fileID: 1144998019}
 --- !u!114 &161634084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,6 +199,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1144998019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73914ff46e8f15f41ad5b884c9deb9a6, type: 3}
+  m_Name: GPGGA(Clone)
+  m_EditorClassIdentifier: 
+  _timeMode: 0
+  _quality: 0
+  _satelliteNum: 8
+  _HDOP: 0
+  _geoidHeight: 36.7071
 --- !u!1 &1297124146
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,24 +310,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!114 &1301619668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: befb735fcb3be2a40a5a818458a1939a, type: 3}
-  m_Name: GPGSA(Clone)
-  m_EditorClassIdentifier: 
-  _mode: 0
-  _satelliteID: 
-  _locatingType: 1
-  _PDOP: 0
-  _HDOP: 0
-  _VDOP: 0
 --- !u!1 &1642401433
 GameObject:
   m_ObjectHideFlags: 0
