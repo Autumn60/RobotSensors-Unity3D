@@ -20,6 +20,7 @@ namespace RobotSensors
         {
             _msg = new ImuMsg();
             _header = new AutoHeader();
+
             _header.Init(frame_id);
         }
 
