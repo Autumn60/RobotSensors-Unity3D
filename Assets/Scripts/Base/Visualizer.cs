@@ -7,6 +7,21 @@ namespace RobotSensors
     [ExecuteAlways]
     public class Visualizer<T> : MonoBehaviour
     {
+        [System.Serializable]
+        protected class SphereSetting
+        {
+            public Color color = Color.white;
+            public float radius = 0.5f;
+        }
+
+        [System.Serializable]
+        protected class LineSetting
+        {
+            public Color color = Color.white;
+            public bool fixLineLength = true;
+            public float lineLengthFactor = 1.0f;
+        }
+
         protected enum VisualizeMode
         {
             NONE,
