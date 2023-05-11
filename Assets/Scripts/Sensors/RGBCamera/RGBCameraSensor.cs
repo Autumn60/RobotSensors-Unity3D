@@ -26,7 +26,7 @@ namespace RobotSensors
         {
             _cam = GetComponent<Camera>();
             _rt = new RenderTexture(_resolution.x, _resolution.y, 0, RenderTextureFormat.ARGB32);
-            _texture = new Texture2D(_rt.width, _rt.height, TextureFormat.RGBA32, false);
+            _texture = new Texture2D(_resolution.x, _resolution.y, TextureFormat.RGBA32, false);
             _cam.targetTexture = _rt;
         }
 
