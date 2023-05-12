@@ -12,12 +12,13 @@ namespace RobotSensors
         private DepthCameraSerializer _serializer;
 
         [SerializeField]
-        private string _topicName = "imu/raw_data";
+        private string _topicName = "depthImage";
         [SerializeField]
-        private string _frame_id = "imu_link";
+        private string _frame_id = "camera";
 
         protected override void Init()
         {
+            _topicName += "/compressed";
             _ros.RegisterPublisher<CompressedImageMsg>(_topicName);
             _serializer = new DepthCameraSerializer();
             _serializer.Init(_frame_id);
