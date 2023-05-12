@@ -792,7 +792,7 @@ MonoBehaviour:
   _visualizeMode_edit: 0
   _visualizeMode_play: 0
   _defaultColor: {r: 1, g: 1, b: 1, a: 1}
-  _image: {fileID: 1976433263}
+  _output: {fileID: 1976433263}
 --- !u!114 &1102621108
 MonoBehaviour:
   m_ObjectHideFlags: 0
