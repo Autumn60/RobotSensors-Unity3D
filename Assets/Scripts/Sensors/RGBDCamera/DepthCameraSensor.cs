@@ -11,9 +11,6 @@ namespace RobotSensors
         [SerializeField]
         private Vector2Int _resolution = new Vector2Int(640, 480);
 
-        [SerializeField]
-        private Shader _depthShader;
-
         [SerializeField, Range(0, 100)]
         private int _quality = 100;
 
@@ -31,7 +28,7 @@ namespace RobotSensors
         protected override void Init()
         {
             _cam = GetComponent<Camera>();
-            _material = new Material(_depthShader);
+            _material = new Material(Shader.Find("Depth"));
             _rt = new RenderTexture(_resolution.x, _resolution.y, 32, RenderTextureFormat.ARGB32);
             _texture = new Texture2D(_resolution.x, _resolution.y, TextureFormat.RGBA32, false);
 
