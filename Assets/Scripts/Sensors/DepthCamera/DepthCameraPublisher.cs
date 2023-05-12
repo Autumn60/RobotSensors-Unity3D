@@ -6,13 +6,13 @@ using RosMessageTypes.Sensor;
 
 namespace RobotSensors
 {
-    [RequireComponent(typeof(RGBCameraSensor))]
-    public class RGBCameraPublisher : Publisher<RGBCameraSensor>
+    [RequireComponent(typeof(DepthCameraSensor))]
+    public class DepthCameraPublisher : Publisher<DepthCameraSensor>
     {
-        private RGBCameraSerializer _serializer;
+        private DepthCameraSerializer _serializer;
 
         [SerializeField]
-        private string _topicName = "image";
+        private string _topicName = "depthImage";
         [SerializeField]
         private string _frame_id = "camera";
 
@@ -20,7 +20,7 @@ namespace RobotSensors
         {
             _topicName += "/compressed";
             _ros.RegisterPublisher<CompressedImageMsg>(_topicName);
-            _serializer = new RGBCameraSerializer();
+            _serializer = new DepthCameraSerializer();
             _serializer.Init(_frame_id);
         }
 

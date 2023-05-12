@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 namespace RobotSensors
 {
-    [RequireComponent(typeof(RGBCameraSensor))]
-    public class RGBCameraVisualizer : Visualizer<RGBCameraSensor>
+    [RequireComponent(typeof(DepthCameraSensor))]
+    public class DepthCameraVisualizer : Visualizer<DepthCameraSensor>
     {
         [SerializeField]
-        private RawImage _image;
+        private RawImage _output;
 
         protected override void Update()
         {
@@ -23,8 +23,8 @@ namespace RobotSensors
 
         private void VisualizeTexture()
         {
-            if (!_image || !_target.texture) return;
-            _image.texture = _target.texture;
+            if (!_output || !_target.texture) return;
+            _output.texture = _target.texture;
         }
     }
 }

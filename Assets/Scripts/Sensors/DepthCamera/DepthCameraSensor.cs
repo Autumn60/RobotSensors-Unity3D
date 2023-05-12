@@ -6,7 +6,7 @@ using UnityEngine.Rendering;
 namespace RobotSensors
 {
     [RequireComponent(typeof(Camera))]
-    public class RGBCameraSensor : Sensor
+    public class DepthCameraSensor : Sensor
     {
         [SerializeField]
         private Vector2Int _resolution = new Vector2Int(640, 480);
@@ -16,21 +16,39 @@ namespace RobotSensors
 
         private Camera _cam;
 
+        private Material _material;
+
         private RenderTexture _rt = null;
         private Texture2D _texture;
 
         public Texture2D texture { get => _texture; }
+
         public int quality { get => _quality; }
 
         protected override void Init()
         {
             _cam = GetComponent<Camera>();
-            _rt = new RenderTexture(_resolution.x, _resolution.y, 0, RenderTextureFormat.ARGB32);
+            _material = new Material(Shader.Find("Depth"));
+            _rt = new RenderTexture(_resolution.x, _resolution.y, 32, RenderTextureFormat.ARGB32);
             _texture = new Texture2D(_resolution.x, _resolution.y, TextureFormat.RGBA32, false);
+
+            _cam.clearFlags = CameraClearFlags.SolidColor;
             _cam.targetTexture = _rt;
+
+            float n = _cam.nearClipPlane;
+            float f = _cam.farClipPlane;
+
+            _material.SetFloat("_N", n);
+            _material.SetFloat("_F", f);
+            _material.SetFloat("_F_N", f-n);
         }
 
         protected override void UpdateSensor()
+        {
+            UpdateTexture();
+        }
+
+        private void UpdateTexture()
         {
             AsyncGPUReadback.Request(_rt, 0, request => {
                 if (request.hasError)
@@ -48,14 +66,17 @@ namespace RobotSensors
 
         private void OnDestroy()
         {
-            _cam.targetTexture = null;
             _rt.Release();
         }
 
         private void OnApplicationQuit()
         {
-            _cam.targetTexture = null;
             _rt.Release();
+        }
+
+        private void OnRenderImage(RenderTexture source, RenderTexture dest)
+        {
+            Graphics.Blit(source, dest, _material);
         }
     }
 }
