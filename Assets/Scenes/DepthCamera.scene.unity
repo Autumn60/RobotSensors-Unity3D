@@ -805,9 +805,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c45afb554ad92264a8175426d6eecb6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _frequency: 20
+  _frequency: 10
   _resolution: {x: 640, y: 480}
-  _depthShader: {fileID: 4800000, guid: edc83e9f0679b2449897a282779153e2, type: 3}
   _quality: 100
 --- !u!20 &1102621109
 Camera:
@@ -880,8 +879,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _frequency: 10
-  _topicName: imu/raw_data
-  _frame_id: imu_link
+  _topicName: depthImage
+  _frame_id: camera
 --- !u!1 &1248221185
 GameObject:
   m_ObjectHideFlags: 0
