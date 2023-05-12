@@ -14,12 +14,14 @@ namespace RobotSensors
         protected override void Update()
         {
             base.Update();
-            base._visualizeMode_edit = Visualizer<RGBDCameraSensor>.VisualizeMode.NONE;
-            base._visualizeMode_play = Visualizer<RGBDCameraSensor>.VisualizeMode.NONE;
-            Visualize();
+            VisualizeTexture();
         }
 
         protected override void Visualize()
+        {
+        }
+
+        private void VisualizeTexture()
         {
             if (!_image || !_target.texture) return;
             _image.texture = _target.texture;
