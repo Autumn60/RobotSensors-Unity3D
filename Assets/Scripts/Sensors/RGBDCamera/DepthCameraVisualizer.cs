@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 namespace RobotSensors
 {
-    [RequireComponent(typeof(RGBDCameraSensor))]
-    public class RGBDCameraVisualizer : Visualizer<RGBDCameraSensor>
+    [RequireComponent(typeof(DepthCameraSensor))]
+    public class DepthCameraVisualizer : Visualizer<DepthCameraSensor>
     {
         [SerializeField]
         private RawImage _image;

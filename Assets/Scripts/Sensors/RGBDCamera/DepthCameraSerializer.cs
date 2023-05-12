@@ -7,7 +7,7 @@ using RosMessageTypes.Sensor;
 
 namespace RobotSensors
 {
-    public class RGBDCameraSerializer : Serializer
+    public class DepthCameraSerializer : Serializer
     {
         private CompressedImageMsg _msg;
 
