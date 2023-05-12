@@ -2,7 +2,9 @@ Shader "Depth"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
+        _N("_N", float) = 0.0
+        _F("_F", float) = 0.0
+        _F_N("_F_N", float) = 0.0
     }
     SubShader
     {
@@ -16,8 +18,10 @@ Shader "Depth"
             #pragma fragment frag
             #include "UnityCG.cginc"
 
-            sampler2D _MainTex;
             sampler2D _CameraDepthTexture;
+            float _N;
+            float _F;
+            float _F_N;
 
             struct appdata
             {
@@ -39,11 +43,11 @@ Shader "Depth"
                 return o;
             }
             
-            fixed4 frag (v2f i) : SV_Target
+            float4 frag (v2f i) : SV_Target
             {
-                fixed4 color = tex2D(_MainTex, i.uv);
-                fixed depth = UNITY_SAMPLE_DEPTH(tex2D(_CameraDepthTexture,i.uv));
-                return fixed4(color.x, color.y, color.z, depth);
+                float depth = UNITY_SAMPLE_DEPTH(tex2D(_CameraDepthTexture,i.uv));
+                float a = _N / _F_N * (_F / (_N + _F_N * depth) - 1.0f);
+                return float4(a, a, a, 1);
             }
             ENDCG
         }
