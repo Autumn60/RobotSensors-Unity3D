@@ -820,8 +820,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2096472518}
   - component: {fileID: 2096472517}
-  - component: {fileID: 2096472516}
-  - component: {fileID: 2096472515}
+  - component: {fileID: 2096472521}
+  - component: {fileID: 2096472520}
   - component: {fileID: 2096472519}
   m_Layer: 0
   m_Name: Camera
@@ -830,36 +830,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2096472515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2096472514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1b445af48bd560449d7896cc4544e75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _frequency: 30
-  _topicName: imu/raw_data
-  _frame_id: imu_link
---- !u!114 &2096472516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2096472514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3489f579cba5774a95c0022373d9364, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _frequency: 30
-  _resolution: {x: 596, y: 480}
-  _quality: 100
 --- !u!20 &2096472517
 Camera:
   m_ObjectHideFlags: 0
@@ -934,3 +904,33 @@ MonoBehaviour:
   _visualizeMode_play: 0
   _defaultColor: {r: 1, g: 1, b: 1, a: 1}
   _image: {fileID: 1891407431}
+--- !u!114 &2096472520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096472514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1b445af48bd560449d7896cc4544e75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _frequency: 30
+  _topicName: image
+  _frame_id: camera
+--- !u!114 &2096472521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096472514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3489f579cba5774a95c0022373d9364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _frequency: 30
+  _resolution: {x: 640, y: 480}
+  _quality: 100
