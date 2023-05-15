@@ -16,8 +16,6 @@ namespace RobotSensors
 
         private Camera _cam;
 
-        private Material _material;
-
         private RenderTexture _rt = null;
         private Texture2D _texture;
 
@@ -28,19 +26,16 @@ namespace RobotSensors
         protected override void Init()
         {
             _cam = GetComponent<Camera>();
-            _material = new Material(Shader.Find("Depth"));
             _rt = new RenderTexture(_resolution.x, _resolution.y, 32, RenderTextureFormat.ARGB32);
             _texture = new Texture2D(_resolution.x, _resolution.y, TextureFormat.RGBA32, false);
 
             _cam.clearFlags = CameraClearFlags.SolidColor;
             _cam.targetTexture = _rt;
 
-            float n = _cam.nearClipPlane;
-            float f = _cam.farClipPlane;
-
-            _material.SetFloat("_N", n);
-            _material.SetFloat("_F", f);
-            _material.SetFloat("_F_N", f-n);
+            if (!GetComponent<DepthCamera>())
+            {
+                gameObject.AddComponent<DepthCamera>();
+            }
         }
 
         protected override void UpdateSensor()
@@ -72,11 +67,6 @@ namespace RobotSensors
         private void OnApplicationQuit()
         {
             _rt.Release();
-        }
-
-        private void OnRenderImage(RenderTexture source, RenderTexture dest)
-        {
-            Graphics.Blit(source, dest, _material);
         }
     }
 }
