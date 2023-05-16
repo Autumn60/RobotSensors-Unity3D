@@ -2,9 +2,7 @@ Shader "Depth"
 {
     Properties
     {
-        _N("_N", float) = 0.0
         _F("_F", float) = 0.0
-        _F_N("_F_N", float) = 0.0
     }
     SubShader
     {
@@ -33,6 +31,7 @@ Shader "Depth"
             {
                 float4 vertex : SV_POSITION;
                 float2 uv : TEXCOORD0;
+                float4 viewDir : TEXCOORD1;
             };
 
             v2f vert (appdata v)
@@ -40,14 +39,16 @@ Shader "Depth"
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
+                o.viewDir = mul (unity_CameraInvProjection, float4 (o.uv * 2.0 - 1.0, 1.0, 1.0));
                 return o;
             }
             
-            float4 frag (v2f i) : SV_Target
+            float4 frag(v2f i) : SV_Target
             {
-                float depth = UNITY_SAMPLE_DEPTH(tex2D(_CameraDepthTexture,i.uv));
-                float a = _N / _F_N * (_F / (_N + _F_N * depth) - 1.0f);
-                return float4(a, a, a, 1);
+                float depth01 = Linear01Depth (tex2D (_CameraDepthTexture, i.uv).r);
+                float3 viewPos = (i.viewDir.xyz / i.viewDir.w) * depth01;
+                float distance = 1.0f - length(viewPos)/_F;
+                return float4(distance, distance, distance, 1);
             }
             ENDCG
         }
