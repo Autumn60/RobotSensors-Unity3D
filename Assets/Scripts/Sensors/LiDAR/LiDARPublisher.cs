@@ -33,10 +33,6 @@ namespace RobotSensors
         {
             base.Update();
             _serializer.Update();
-            if (!Application.isPlaying && (_serializer.format.updated))
-            {
-                EditorUtility.SetDirty(this);
-            }
         }
 
         protected override void Publish(float time)
