@@ -50,6 +50,7 @@ namespace RobotSensors
             SetupCameras();
             SetupIndicesAndDirections();
             SetupJobs();
+            base.Init();
         }
 
         private void CreateSensor()
@@ -137,8 +138,7 @@ namespace RobotSensors
         private void SetupJobs()
         {
             int pointsNum = _channelNum * _resolution;
-            base._points = new NativeArray<Vector3>(pointsNum, Allocator.Persistent);
-
+            base.points = new NativeArray<Vector3>(pointsNum, Allocator.Persistent);
             _job = new TextureToPointsJob()
             {
                 near = _minRange,
@@ -149,7 +149,7 @@ namespace RobotSensors
                 pixels0 = _textures[0].GetPixelData<Color>(0),
                 pixels1 = _textures[1].GetPixelData<Color>(0),
                 pixels2 = _textures[2].GetPixelData<Color>(0),
-                points = base._points
+                points = base.points
             };
         }
 
@@ -212,12 +212,17 @@ namespace RobotSensors
             base._handle.Complete();
             _pixelIndices.Dispose();
             _directions.Dispose();
-            _points.Dispose();
+            points.Dispose();
 
             foreach (RenderTexture rt in _rts)
             {
                 rt.Release();
             }
+        }
+
+        protected override uint GetPointNum()
+        {
+            return (uint)(_resolution * _channelNum);
         }
 
         [BurstCompile]

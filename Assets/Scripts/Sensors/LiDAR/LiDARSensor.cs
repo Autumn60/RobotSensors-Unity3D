@@ -13,21 +13,27 @@ namespace RobotSensors
     {
         protected JobHandle _handle;
 
-        protected NativeArray<Vector3> _points;
-        public NativeArray<Vector3>.ReadOnly points { get => GetPoints(); }
+        public NativeArray<Vector3> points;
+
+        public uint pointNum { get => GetPointNum(); }
 
         protected override void Init()
         {
+            base.Init();
         }
 
         protected override void UpdateSensor()
         {
         }
 
-        protected virtual NativeArray<Vector3>.ReadOnly GetPoints()
+        protected virtual uint GetPointNum()
+        {
+            return 0;
+        }
+
+        public void CompleteJob()
         {
             _handle.Complete();
-            return _points.AsReadOnly();
         }
     }
 }
