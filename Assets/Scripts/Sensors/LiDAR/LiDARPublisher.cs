@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 namespace RobotSensors
 {
@@ -31,13 +32,11 @@ namespace RobotSensors
         protected override void Update()
         {
             base.Update();
-            /*
             _serializer.Update();
             if (!Application.isPlaying && (_serializer.format.updated))
             {
                 EditorUtility.SetDirty(this);
             }
-            */
         }
 
         protected override void Publish(float time)
