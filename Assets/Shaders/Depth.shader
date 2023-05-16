@@ -2,9 +2,7 @@ Shader "Depth"
 {
     Properties
     {
-        _N("_N", float) = 0.0
         _F("_F", float) = 0.0
-        _F_N("_F_N", float) = 0.0
     }
     SubShader
     {
@@ -45,11 +43,12 @@ Shader "Depth"
                 return o;
             }
             
-            float4 frag (v2f i) : SV_Target
+            float4 frag(v2f i) : SV_Target
             {
-                float depth01 = 1.0f - Linear01Depth(tex2D(_CameraDepthTexture,i.uv));
+                float depth01 = Linear01Depth (tex2D (_CameraDepthTexture, i.uv).r);
                 float3 viewPos = (i.viewDir.xyz / i.viewDir.w) * depth01;
-                return length(viewPos) / _F_N;
+                float distance = 1.0f - length(viewPos)/_F;
+                return float4(distance, distance, distance, 1);
             }
             ENDCG
         }
