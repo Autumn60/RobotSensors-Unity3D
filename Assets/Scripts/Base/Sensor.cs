@@ -14,16 +14,20 @@ namespace RobotSensors
 
         protected float _frequency_inv;
 
+        protected bool _initialized = false;
+        public bool initialized { get => _initialized; }
+
         private void Start()
         {
             _time_last = Time.time;
             _frequency_inv = 1.0f / _frequency;
+            _initialized = false;
             Init();
         }
 
         protected virtual void Init()
         {
-
+            _initialized = true;
         }
 
         private void Update()

@@ -2,43 +2,53 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Unity.Burst;
+using Unity.Collections;
+using UnityEngine.Jobs;
+using Unity.Jobs;
+
+using RosMessageTypes.Std;
+using RosMessageTypes.Sensor;
+
 namespace RobotSensors
 {
     [System.Serializable]
-    public class LiDARSerializer : Serializer
+    public class LiDARSerializer<T> : Serializer
     {
-        [SerializeField]
-        private PointCloudFormatManager _format;
+        private AutoHeader _autoHeader;
 
-        //private SentenceMsg _msg;
-        private AutoHeader _header;
+        protected T _msg;
 
-        public PointCloudFormatManager format { get => _format; }
-        //public SentenceMsg msg { get => _msg; }
+        protected int _pointNum;
+
+        public T msg { get => _msg; }
+
+        protected HeaderMsg _header { get => _autoHeader.header; }
 
         public void Start()
         {
-            _format.Start();
         }
 
-        public void Init(string frame_id)
+        public virtual void Init(string frame_id, ref NativeArray<Vector3> points, uint pointNum)
         {
-            //_msg = new SentenceMsg();
-            _header = new AutoHeader();
+            _autoHeader = new AutoHeader();
+            _autoHeader.Init(frame_id);
 
-            _header.Init(frame_id);
+            _pointNum = (int)pointNum;
         }
 
         public void Update()
         {
-            _format.Update();
         }
 
-        public void Serialize(float time)
+        public virtual void Dispose()
         {
-            _header.Serialize(time);
-            //_msg.sentence = _format.Serialize(coordinate, velocity);
-            //_msg.header = _header.header;
+        
+        }
+
+        public virtual void Serialize(float time)
+        {
+            _autoHeader.Serialize(time);
         }
     }
 }
