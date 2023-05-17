@@ -194,7 +194,7 @@ namespace RobotSensors
                 }
             });
 
-            base._handle = _job.Schedule(_resolution * _channelNum, _resolution*_channelNum);
+            base._handle = _job.Schedule(_resolution * _channelNum, 1);
 
             JobHandle.ScheduleBatchedJobs();
         }
