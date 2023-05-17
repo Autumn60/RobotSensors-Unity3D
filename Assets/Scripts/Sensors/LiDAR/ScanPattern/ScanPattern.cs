@@ -23,6 +23,7 @@ namespace RobotSensors
         [SerializeField, ReadOnly]
         private float _maxZenith;
 
+        [SerializeField, HideInInspector]
         private Vector3[] _scans;
 
         public bool loaded { get => _loaded; }
