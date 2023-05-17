@@ -108,7 +108,6 @@ namespace RobotSensors
         private void SetupIndicesAndDirections()
         {
             int pointsNum = _channelNum * _resolution;
-            float fov_2 = Mathf.Max(Mathf.Abs(_minZenithAngle), Mathf.Abs(_maxZenithAngle));
 
             _pixelIndices = new NativeArray<int>(pointsNum/3, Allocator.Persistent);
             _directions = new NativeArray<Vector3>(pointsNum, Allocator.Persistent);
