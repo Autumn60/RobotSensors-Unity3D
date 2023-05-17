@@ -63,7 +63,7 @@ namespace RobotSensors
             _rotator.localPosition = Vector3.zero;
 
             _cams = new Camera[3];
-            for(int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 GameObject cam_obj = new GameObject();
                 Transform cam_transform = cam_obj.transform;
@@ -81,14 +81,14 @@ namespace RobotSensors
 
             float resolution_y = _channelNum / (_maxZenithAngle - _minZenithAngle) * fov;
             float resolution_x = Mathf.CeilToInt(resolution_y / Mathf.Tan(fov*0.5f*Mathf.Deg2Rad) * Mathf.Tan(60.0f*Mathf.Deg2Rad));
-            _textureSize.x = Mathf.CeilToInt(resolution_x);
-            _textureSize.y = Mathf.CeilToInt(resolution_y);
+            _textureSize.x = Mathf.CeilToInt(resolution_x) * 128 / _channelNum;
+            _textureSize.y = Mathf.CeilToInt(resolution_y) * 128 / _channelNum;
 
             _rts = new RenderTexture[3];
             _rts[0] = new RenderTexture(_textureSize.x, _textureSize.y, 32, RenderTextureFormat.ARGBFloat);
             _rts[1] = new RenderTexture(_textureSize.x, _textureSize.y, 32, RenderTextureFormat.ARGBFloat);
             _rts[2] = new RenderTexture(_textureSize.x, _textureSize.y, 32, RenderTextureFormat.ARGBFloat);
-            for(int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 _cams[i].targetTexture = _rts[i];
                 _cams[i].fieldOfView = fov;
@@ -113,9 +113,9 @@ namespace RobotSensors
             _directions = new NativeArray<Vector3>(pointsNum, Allocator.Persistent);
 
             float radius = _textureSize.x * 0.5f / Mathf.Tan(60.0f * Mathf.Deg2Rad);
-            for(int r = 0; r < _resolution / 3; r++)
+            for (int r = 0; r < _resolution / 3; r++)
             {
-                for(int c = 0; c < _channelNum; c++)
+                for (int c = 0; c < _channelNum; c++)
                 {
                     float angle_r = ((float)r / (float)_resolution) * 360.0f;
                     float angle_c = Mathf.Lerp(_minZenithAngle, _maxZenithAngle, (float)c / (float)_channelNum);
@@ -199,7 +199,7 @@ namespace RobotSensors
 
         private void OnDestroy()
         {
-            foreach(RenderTexture rt in _rts)
+            foreach (RenderTexture rt in _rts)
             {
                 rt.Release();
             }
