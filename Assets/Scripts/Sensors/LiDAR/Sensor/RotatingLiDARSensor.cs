@@ -35,7 +35,6 @@ namespace RobotSensors
         private RenderTexture[] _rts = null;
         private Texture2D[] _textures;
 
-        [SerializeField]
         private Vector2Int _textureSize;
 
         private TextureToPointsJob _job;
