@@ -988,10 +988,9 @@ MonoBehaviour:
   _minZenithAngle: -15
   _maxZenithAngle: 15
   _minRange: 0.1
-  _maxRange: 50
-  _channelNum: 64
+  _maxRange: 100
+  _channelNum: 16
   _resolution: 3600
-  _textureSize: {x: 0, y: 0}
 --- !u!114 &2108721262
 MonoBehaviour:
   m_ObjectHideFlags: 0
