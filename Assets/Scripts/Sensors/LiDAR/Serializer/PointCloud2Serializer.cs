@@ -17,7 +17,6 @@ namespace RobotSensors
         private JobHandle _handle;
         private PointsToPointCloud2MsgJob _job;
 
-        private NativeArray<float> _tmp;
         private NativeArray<byte> _data;
 
         public override void Init(string frame_id, ref NativeArray<Vector3> points, uint pointNum)
@@ -43,14 +42,12 @@ namespace RobotSensors
             _msg.is_dense = true;
 
             _data = new NativeArray<byte>((int)pointNum * 12, Allocator.Persistent);
-            _tmp = new NativeArray<float>((int)pointNum * 3, Allocator.Persistent);
 
             _job = new PointsToPointCloud2MsgJob
             {
                 pointNum = (int)pointNum,
                 points = points,
-                data = _data,
-                tmp = _tmp
+                data = _data
             };
         }
 
@@ -58,7 +55,7 @@ namespace RobotSensors
         {
             base.Serialize(time);
             _msg.header = _header;
-            _handle = _job.Schedule();
+            _handle = _job.Schedule(_pointNum, 1);
 
             JobHandle.ScheduleBatchedJobs();
             _handle.Complete();
@@ -69,32 +66,28 @@ namespace RobotSensors
         public override void Dispose()
         {
             _handle.Complete();
-            _tmp.Dispose();
             _data.Dispose();
         }
 
         [BurstCompile]
-        public struct PointsToPointCloud2MsgJob : IJob
+        public struct PointsToPointCloud2MsgJob : IJobParallelFor
         {
             public int pointNum;
 
             [ReadOnly]
             public NativeArray<Vector3> points;
-            public NativeArray<float> tmp;
 
             public NativeArray<byte> data;
 
-
-            public void Execute()
+            public void Execute(int index)
             {
-                for (int index = 0; index < pointNum; index++)
-                {
-                    tmp[index * 3] = points[index].x;
-                    tmp[index * 3 + 1] = points[index].z;
-                    tmp[index * 3 + 2] = points[index].y;
-                }
+                NativeArray<float> tmp = new NativeArray<float>(3, Allocator.Temp);
+                tmp[0] = points[index].x;
+                tmp[1] = points[index].z;
+                tmp[2] = points[index].y;
                 var slice = new NativeSlice<float>(tmp).SliceConvert<byte>();
-                slice.CopyTo(data);
+                slice.CopyTo(data.GetSubArray(index * 12, 12));
+                
             }
         }
     }

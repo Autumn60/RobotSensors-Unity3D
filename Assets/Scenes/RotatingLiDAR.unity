@@ -795,7 +795,7 @@ MonoBehaviour:
   _maxZenithAngle: 15
   _minRange: 0.1
   _maxRange: 100
-  _channelNum: 64
+  _channelNum: 32
   _resolution: 3600
 --- !u!114 &2108721262
 MonoBehaviour:
@@ -829,6 +829,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eff5007ef87dff749836e565e389e38f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _frequency: 10
+  _frequency: 20
   _topicName: lidar_points
   _frame_id: lidar_link
