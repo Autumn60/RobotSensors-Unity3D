@@ -91,6 +91,9 @@ namespace RobotSensors
             _loadedFile = _file.name;
             _row = lines.Length - 2;
             _column = headers.Length;
+
+            EditorUtility.SetDirty(this);
+            AssetDatabase.SaveAssets();
         }
     }
 

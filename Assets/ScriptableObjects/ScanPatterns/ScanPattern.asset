@@ -17,3 +17,5 @@ MonoBehaviour:
   _loadedFile: horizon
   _row: 960000
   _column: 3
+  _maxAzimuth: 40.95888
+  _maxZenith: 14.09211

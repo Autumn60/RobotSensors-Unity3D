@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Avia
   m_EditorClassIdentifier: 
   _file: {fileID: 4900000, guid: 23a1becc53b118f4cbb0e498043db297, type: 3}
-  _loaded: 0
-  _loadedFile: 
-  _row: 0
-  _column: 0
+  _loaded: 1
+  _loadedFile: avia
+  _row: 960000
+  _column: 3
+  _maxAzimuth: 35.309658
+  _maxZenith: 38.591343
