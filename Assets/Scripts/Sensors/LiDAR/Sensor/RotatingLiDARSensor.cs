@@ -226,7 +226,7 @@ namespace RobotSensors
         }
 
         [BurstCompile]
-        public struct TextureToPointsJob : IJobParallelFor
+        private struct TextureToPointsJob : IJobParallelFor
         {
             public float near;
             public float far;
