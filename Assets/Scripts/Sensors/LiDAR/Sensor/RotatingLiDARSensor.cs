@@ -49,7 +49,7 @@ namespace RobotSensors
             CreateSensor();
             SetupCameras();
             SetupIndicesAndDirections();
-            SetupJobs();
+            SetupJob();
             base.Init();
         }
 
@@ -119,7 +119,7 @@ namespace RobotSensors
                 {
                     float angle_r = ((float)r / (float)_resolution) * 360.0f;
                     float angle_c = Mathf.Lerp(_minZenithAngle, _maxZenithAngle, (float)c / (float)_channelNum);
-                    Vector3 dir = Quaternion.Euler(-angle_c, angle_r - 60.0f, 0) * Vector3.forward * radius;
+                    Vector3 dir = Quaternion.Euler(-angle_c, angle_r - 60.0f, 0) * Vector3.forward;
                     dir *= (radius/dir.z);
                     
                     for (int i = 0; i < 3; i++)
@@ -134,7 +134,7 @@ namespace RobotSensors
             }
         }
 
-        private void SetupJobs()
+        private void SetupJob()
         {
             int pointsNum = _channelNum * _resolution;
             base.points = new NativeArray<Vector3>(pointsNum, Allocator.Persistent);
