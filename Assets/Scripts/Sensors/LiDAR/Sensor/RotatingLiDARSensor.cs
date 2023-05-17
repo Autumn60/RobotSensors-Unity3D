@@ -141,7 +141,6 @@ namespace RobotSensors
             base.points = new NativeArray<Vector3>(pointsNum, Allocator.Persistent);
             _job = new TextureToPointsJob()
             {
-                near = _minRange,
                 far = _maxRange,
                 pointsNum_3 = pointsNum/3,
                 pixelIndices = _pixelIndices,
@@ -228,7 +227,6 @@ namespace RobotSensors
         [BurstCompile]
         private struct TextureToPointsJob : IJobParallelFor
         {
-            public float near;
             public float far;
             public int pointsNum_3;
 
