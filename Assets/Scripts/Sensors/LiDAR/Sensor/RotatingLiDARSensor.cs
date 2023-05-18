@@ -43,14 +43,19 @@ namespace RobotSensors
 
         private Transform _transform;
 
+        private bool[] _textureInit;
+
         protected override void Init()
         {
             _resolution = (_resolution / 3) * 3;
+            _textureInit = new bool[3] { false, false, false };
             CreateSensor();
             SetupCameras();
             SetupIndicesAndDirections();
             SetupJob();
             base.Init();
+
+            UpdateTextures();
         }
 
         private void CreateSensor()
@@ -151,10 +156,8 @@ namespace RobotSensors
             };
         }
 
-        protected override void UpdateSensor()
+        private void UpdateTextures()
         {
-            base._handle.Complete();
-
             AsyncGPUReadback.Request(_rts[0], 0, request => {
                 if (request.hasError)
                 {
@@ -165,6 +168,7 @@ namespace RobotSensors
                     var data = request.GetData<Color>();
                     _textures[0].LoadRawTextureData(data);
                     _textures[0].Apply();
+                    _textureInit[0] = true;
                 }
             });
             AsyncGPUReadback.Request(_rts[1], 0, request => {
@@ -177,6 +181,7 @@ namespace RobotSensors
                     var data = request.GetData<Color>();
                     _textures[1].LoadRawTextureData(data);
                     _textures[1].Apply();
+                    _textureInit[1] = true;
                 }
             });
             AsyncGPUReadback.Request(_rts[2], 0, request => {
@@ -189,8 +194,17 @@ namespace RobotSensors
                     var data = request.GetData<Color>();
                     _textures[2].LoadRawTextureData(data);
                     _textures[2].Apply();
+                    _textureInit[2] = true;
                 }
             });
+        }
+
+        protected override void UpdateSensor()
+        {
+            if (!_textureInit[0] && !_textureInit[1] || !_textureInit[2]) return;
+            base._handle.Complete();
+
+            UpdateTextures();
 
             base._handle = _job.Schedule(_resolution * _channelNum, 1);
 
