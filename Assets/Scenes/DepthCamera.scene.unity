@@ -790,9 +790,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _visualizeMode_edit: 0
-  _visualizeMode_play: 0
+  _visualizeMode_play: 2
   _defaultColor: {r: 1, g: 1, b: 1, a: 1}
   _output: {fileID: 1976433263}
+  _point:
+    color: {r: 0, g: 0, b: 0, a: 1}
+    radius: 0.025
+  _maxPointNum: 1000
 --- !u!114 &1102621108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -806,7 +810,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _frequency: 10
+  _mode: 1
   _resolution: {x: 640, y: 480}
+  _fov: 30
+  _minRange: 0.05
+  _maxRange: 20
   _quality: 100
 --- !u!20 &1102621109
 Camera:
@@ -879,7 +887,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _frequency: 10
-  _topicName: depthImage
+  _topicName_img: depthImage
+  _topicName_pc: points
   _frame_id: camera
 --- !u!1 &1248221185
 GameObject:

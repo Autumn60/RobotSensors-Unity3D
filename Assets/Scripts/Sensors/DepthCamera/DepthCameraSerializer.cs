@@ -24,14 +24,12 @@ namespace RobotSensors
             _header.Init(frame_id);
         }
 
-        public CompressedImageMsg Serialize(float time, Texture2D texture, int quality)
+        public void Serialize(float time, Texture2D texture, int quality)
         {
             _header.Serialize(time);
             _msg.header = _header.header;
 
             _msg.data = texture.EncodeToJPG(quality);
-
-            return _msg;
         }
     }
 }
